@@ -1,0 +1,23 @@
+# Ignore large/generated folders
+outputs/
+raw_images/
+splits/
+
+# Ignore large data files
+dataset-metadata.json
+dataset_metadata.json
+metadata.csv
+
+# Ignore large image folders
+images_224/
+images_cropped/
+
+# Keep these folders but ignore their contents
+!images_224/.gitkeep
+!images_cropped/.gitkeep
+
+# Common ignore patterns
+*.pyc
+__pycache__/
+.DS_Store
+*.log
