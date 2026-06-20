@@ -4,8 +4,6 @@
 
 OPTED is the first publicly available, standardized trachoma eye image dataset created using **zero-shot SAM 3 segmentation**. The pipeline automatically detects and extracts the conjunctival region of interest from clinical photographs, producing analysis-ready images with consistent framing.
 
-**Trachoma** is the world's leading infectious cause of blindness, caused by _Chlamydia trachomatis_. It remains endemic in over 40 countries, disproportionately affecting underserved communities. Early detection of trachoma signs — **TF** (trachomatous inflammation—follicular) and **TI** (trachomatous inflammation—intense) — is critical for timely treatment.
-
 ## Dataset Statistics
 
 |           | Normal    | TF      | TI     | Total     |
@@ -15,7 +13,7 @@ OPTED is the first publicly available, standardized trachoma eye image dataset c
 | Test      | 373       | 48      | 3      | 424       |
 | **Total** | **2,487** | **324** | **21** | **2,832** |
 
-> After quality filtering (confidence ≥ 0.5), **2,236 images** are included.
+> 
 
 ## Directory Structure
 
@@ -96,36 +94,21 @@ train_subset = Subset(dataset, indices)
 3. **Cropping**: Bounding-box extraction around the predicted mask
 4. **Alignment**: Orientation normalization
 5. **Standardization**: Resize to 224×224 px (bilinear interpolation)
-6. **Quality filter**: Minimum confidence score ≥ 0.5
 
 ## Classes (WHO Simplified Grading)
 
 - **Normal**: No signs of active trachoma
-- **TF**: Trachomatous inflammation—follicular (≥5 follicles ≥0.5 mm in the central upper tarsal conjunctiva)
-- **TI**: Trachomatous inflammation—intense (inflammatory thickening obscuring >50% of deep tarsal vessels)
+- **TF**: ≥5 follicles ≥0.5 mm in the upper tarsal conjunctiva
+- **TI**: inflammatory thickening obscuring >50% of deep tarsal vessels
 
 ## Important Notes
 
 - **Class imbalance**: TI is severely underrepresented (21 images). Use appropriate sampling strategies (e.g., WeightedRandomSampler) or loss weighting.
 - **Clinical context**: Labels reflect WHO simplified trachoma grading by trained graders.
-- **Ethics**: This dataset was collected under appropriate ethical oversight. See the accompanying paper for details.
+- **Ethics**: This dataset was collected under appropriate ethical oversight. 
 
-## Citation
 
-If you use OPTED in your research, please cite:
 
-```bibtex
-@inproceedings{opted2025,
-  title     = {OPTED: Open Preprocessed Trachoma Eye Dataset Using Zero-Shot SAM 3 Segmentation},
-  author    = {[Authors]},
-  booktitle = {[Conference]},
-  year      = {2025}
-}
-```
-
-## License
-
-This dataset is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Preprocessed dataset
 
