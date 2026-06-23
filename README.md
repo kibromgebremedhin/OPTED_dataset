@@ -111,5 +111,4 @@ train_subset = Subset(dataset, indices)
 
 
 ## Preprocessed dataset
-
-If you need the dataset, you can request for the whole dataset by sending an email to: **kibrom.gebremedhin@mu.edu.et**
+DOI: https://doi.org/10.5281/zenodo.20797396 
