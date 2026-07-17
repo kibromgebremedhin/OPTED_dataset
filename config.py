@@ -10,7 +10,6 @@ PADDING_RATIO = 0.05
 MASK_THRESHOLD = 0.5
 CONFIDENCE_THRESHOLD = 0.3
 DEVICE = "cuda"
-SAM_MODEL_ID = "CIDAS/clipseg-rd64-refined"
 PRIMARY_PROMPT = "inner surface of eyelid with red tissue"
 PROMPTS = [
     "red tissue inside eye",
