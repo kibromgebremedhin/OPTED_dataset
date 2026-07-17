@@ -93,7 +93,7 @@ train_subset = Subset(dataset, indices)
 2. **Segmentation**: SAM 3 (848M params) with text prompt _"inner surface of eyelid with red tissue"_
 3. **Cropping**: Bounding-box extraction around the predicted mask
 4. **Alignment**: Orientation normalization
-5. **Standardization**: Resize to 224×224 px (bilinear interpolation)
+5. **Standardization**: Resize to 224×224 px (lanczos interpolation)
 
 ## Classes (WHO Simplified Grading)
 
@@ -103,7 +103,7 @@ train_subset = Subset(dataset, indices)
 
 ## Important Notes
 
-- **Class imbalance**: TI is severely underrepresented (21 images). Use appropriate sampling strategies (e.g., WeightedRandomSampler) or loss weighting.
+- **Class imbalance**: TI is severely underrepresented (21 images).
 - **Clinical context**: Labels reflect WHO simplified trachoma grading by trained graders.
 - **Ethics**: This dataset was collected under appropriate ethical oversight. 
 
