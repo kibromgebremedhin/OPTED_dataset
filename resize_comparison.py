@@ -21,7 +21,7 @@ def compare_interpolations(image):
 
 
 def run_comparison():
-    image_paths = sorted(CROPPED_DIR.glob("*.png"))
+    image_paths = sorted(CROPPED_DIR.rglob("*.png"))
     if not image_paths:
         raise FileNotFoundError(f"No cropped images found in {CROPPED_DIR}")
 
