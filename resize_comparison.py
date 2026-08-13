@@ -12,10 +12,14 @@ def compare_interpolations(image):
         "bicubic": cv2.INTER_CUBIC,
         "lanczos": cv2.INTER_LANCZOS4,
     }
+    
+    h, w = image.shape[:2]
     results = {}
+    
     for name, method in methods.items():
-        resized = cv2.resize(image, (224,224), interpolation=method)
-        psnr_score, ssim_score = compute_metrics(image, resized)
+        downsampled = cv2.resize(image, (224, 224), interpolation=method)
+        reconstructed = cv2.resize(downsampled, (w, h), interpolation=method)
+        psnr_score, ssim_score = compute_metrics(image, reconstructed)
         results[name] = {"psnr": psnr_score, "ssim": ssim_score}
     return results
 
@@ -48,18 +52,26 @@ def run_comparison():
         raise RuntimeError("No valid images were processed for interpolation comparison.")
 
     summary = df.groupby("method", as_index=False)[["psnr", "ssim"]].mean()
+    summary_std = df.groupby("method", as_index=False)[["psnr", "ssim"]].std()
+    summary["psnr_std"] = summary_std["psnr"]
+    summary["ssim_std"] = summary_std["ssim"]
     summary = summary.sort_values(by="psnr", ascending=False).reset_index(drop=True)
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+    
     axes[0].bar(summary["method"], summary["psnr"], color="#4C78A8")
     axes[0].set_title("Average PSNR by Interpolation")
     axes[0].set_ylabel("PSNR")
     axes[0].tick_params(axis="x", rotation=25)
+    for i, v in enumerate(summary["psnr"]):
+        axes[0].text(i, v + 0.5, f"{v:.2f}", ha="center", va="bottom", fontsize=9)
 
     axes[1].bar(summary["method"], summary["ssim"], color="#F58518")
     axes[1].set_title("Average SSIM by Interpolation")
     axes[1].set_ylabel("SSIM")
     axes[1].tick_params(axis="x", rotation=25)
+    for i, v in enumerate(summary["ssim"]):
+        axes[1].text(i, v + 0.003, f"{v:.4f}", ha="center", va="bottom", fontsize=9)
 
     fig.tight_layout()
     plot_path = VIS_DIR / "interpolation_psnr_ssim.png"
